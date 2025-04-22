@@ -1,4 +1,4 @@
-import parser from "./parser.js";
+import parser from '../src/parser.js';
 import path from 'path';
 import fs from 'fs';
 
@@ -6,8 +6,8 @@ export default (filepath1, filepath2) => {
   const content1 = fs.readFileSync(path.resolve(filepath1), 'utf-8');
   const content2 = fs.readFileSync(path.resolve(filepath2), 'utf-8');
 
-  const parsedData1 = parser(content1);
-  const parsedData2 = parser(content2);
+  const parsedData1 = parser(content1, 'json');
+  const parsedData2 = parser(content2, 'json');
 
   const genDiff = (obj1, obj2) => {
     const keys = [...new Set([...Object.keys(obj1), ...Object.keys(obj2)])].sort();
