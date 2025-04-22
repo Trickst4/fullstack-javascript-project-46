@@ -12,8 +12,8 @@ Node.js - 20.x
 ### Установка:
 
 ```
-git clone https://github.com/frieswithsalsa/data-diff-tool.git
-cd frontend-project-46/
+git clone https://github.com/Trickst4/fullstack-javascript-project-46.git
+cd fullstack-javascript-project-46/
 make install
 npm link
 ```
