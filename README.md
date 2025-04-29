@@ -57,5 +57,8 @@ gendiff filepath1.json filepath2.json
 
 ## Примеры работы:
 
-Demonstration
+JSON
 https://asciinema.org/a/z3jw7WW5q2rlkbjIh8jKCcJz3
+
+YLM
+https://asciinema.org/a/r9EowZO2ZBgto7rGFFOqMxlh6
