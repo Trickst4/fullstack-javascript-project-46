@@ -55,5 +55,8 @@ https://asciinema.org/a/z3jw7WW5q2rlkbjIh8jKCcJz3
 YLM
 https://asciinema.org/a/r9EowZO2ZBgto7rGFFOqMxlh6
 
-Stylish formatter
+Stylish format
 https://asciinema.org/a/yebTIpwwl89aiVyqpxIlfFf7s
+
+Plain format
+https://asciinema.org/a/ENdbfugMoZdDTz1sU714cJJQL

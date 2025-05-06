@@ -1,7 +1,9 @@
 import stylishFormatDiff from './stylish.js'
+import plainFormatDiff from './plain.js'
 
 const formatters = {
   stylish: stylishFormatDiff,
+  plain: plainFormatDiff,
 }
 
 const selectFormatter = (formatName) => {
