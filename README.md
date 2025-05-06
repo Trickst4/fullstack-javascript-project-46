@@ -24,18 +24,10 @@ npm link
 ### Возможности утилиты:
 
 * Поддержка разных входных форматов: yaml, json
-* Генерация отчета в виде plain text, stylish и json
 
 ### Пример использования:
 
 ```
-# формат plain
-gendiff --format plain path/to/file.yml another/path/file.json
-
-Property 'common.follow' was added with value: false
-Property 'group1.baz' was updated. From 'bas' to 'bars'
-Property 'group2' was removed
-
 # формат stylish
 gendiff filepath1.json filepath2.json
 
@@ -62,3 +54,6 @@ https://asciinema.org/a/z3jw7WW5q2rlkbjIh8jKCcJz3
 
 YLM
 https://asciinema.org/a/r9EowZO2ZBgto7rGFFOqMxlh6
+
+Stylish formatter
+https://asciinema.org/a/yebTIpwwl89aiVyqpxIlfFf7s
