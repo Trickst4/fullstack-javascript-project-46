@@ -57,22 +57,22 @@ bin/gendiff.js __fixtures__/file1.json __fixtures__/file2.json
 
 ## Примеры работы:
 
-JSON
+#JSON
 
 [![asciicast](https://asciinema.org/a/z3jw7WW5q2rlkbjIh8jKCcJz3.svg)](https://asciinema.org/a/z3jw7WW5q2rlkbjIh8jKCcJz3)
 
-YLM
+#YLM
 
 [![asciicast](https://asciinema.org/a/r9EowZO2ZBgto7rGFFOqMxlh6.svg)](https://asciinema.org/a/r9EowZO2ZBgto7rGFFOqMxlh6)
 
-Stylish format
+#Stylish format
 
 [![asciicast](https://asciinema.org/a/yebTIpwwl89aiVyqpxIlfFf7s.svg)](https://asciinema.org/a/yebTIpwwl89aiVyqpxIlfFf7s)
 
-Plain format
+#Plain format
 
 [![asciicast](https://asciinema.org/a/ENdbfugMoZdDTz1sU714cJJQL.svg)](https://asciinema.org/a/ENdbfugMoZdDTz1sU714cJJQL)
 
-JSON format
+#JSON format
 
 [![asciicast](https://asciinema.org/a/UYZpA8dIqaHLImG4NJzBUezNb.svg)](https://asciinema.org/a/UYZpA8dIqaHLImG4NJzBUezNb)

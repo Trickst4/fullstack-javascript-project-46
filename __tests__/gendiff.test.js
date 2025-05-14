@@ -6,67 +6,54 @@ import getParseFile from '../src/parse.js'
 import selectFormatter from '../src/formatters/index.js'
 
 const __filename = fileURLToPath(import.meta.url)
-
 const __dirname = dirname(__filename)
-
 const getFixturePath = filename => path.join(__dirname, '..', '__fixtures__', filename)
-
 const readFile = filename => fs.readFileSync(getFixturePath(filename), 'utf-8').trim()
 
-test('Uncorrect file types', () => {
-  const filepath1 = getFixturePath('expectedResult.tx')
+describe('Error handling tests', () => {
+  test('Throws error on unsupported file type', () => {
+    expect(() => getParseFile(getFixturePath('expectedResult.tx'))).toThrow()
+  })
 
-  expect(() => getParseFile(filepath1)).toThrow()
+  test('Throws error on unsupported formatter type in getDiff', () => {
+    expect(() => getDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'uncorrectType')).toThrow()
+  })
+
+  test('Throws error on unsupported formatter selection', () => {
+    const unsupported = 'uncorrectType'
+    expect(() => selectFormatter(unsupported)).toThrow(`Formatter "${unsupported}" is not supported`)
+  })
 })
 
-test('Uncorrect formatter type', () => {
-  const filepath1 = getFixturePath('file1.json')
-  const filepath2 = getFixturePath('file2.json')
+describe('Diff output tests', () => {
+  const filePairs = [
+    ['file1.json', 'file2.json', 'expectedResult.txt', undefined],
+    ['file1.yml', 'file2.yml', 'expectedResult.txt', undefined],
+  ]
 
-  expect(() => getDiff(filepath1, filepath2, 'uncorrectType')).toThrow()
+  test.each(filePairs)(
+    'Compare %s and %s files with default formatter',
+    (file1, file2, expectedFile, format) => {
+      const result = getDiff(getFixturePath(file1), getFixturePath(file2), format)
+      const expected = readFile(expectedFile)
+      expect(result.trim()).toEqual(expected)
+    },
+  )
 })
 
-test('Throw error when formatter is not supported', () => {
-  const unsupportedFormatName = 'uncorrectType'
-  expect(() => selectFormatter(unsupportedFormatName)).toThrow(`Formatter "${unsupportedFormatName}" is not supported`)
-})
+describe('Diff output with specific formatters', () => {
+  const formatTests = [
+    ['stylish', 'expectedResult.txt'],
+    ['plain', 'expectedResultPlain.txt'],
+    ['json', 'expectedResultJson.txt'],
+  ]
 
-test('Compare JSON files', () => {
-  const filepath1 = getFixturePath('file1.json')
-  const filepath2 = getFixturePath('file2.json')
-  const expected = readFile('expectedResult.txt')
-
-  expect(getDiff(filepath1, filepath2).trim()).toEqual(expected.trim())
-})
-
-test('Compare YAML files', () => {
-  const filepath1 = getFixturePath('file1.yml')
-  const filepath2 = getFixturePath('file2.yml')
-  const expected = readFile('expectedResult.txt')
-
-  expect(getDiff(filepath1, filepath2).trim()).toEqual(expected.trim())
-})
-
-test('Stylish format testing', () => {
-  const filepath1 = getFixturePath('file1.json')
-  const filepath2 = getFixturePath('file2.json')
-  const expected = readFile('expectedResult.txt')
-
-  expect(getDiff(filepath1, filepath2, 'stylish').trim()).toEqual(expected.trim())
-})
-
-test('Plain format testing', () => {
-  const filepath1 = getFixturePath('file1.json')
-  const filepath2 = getFixturePath('file2.json')
-  const expected = readFile('expectedResultPlain.txt')
-
-  expect(getDiff(filepath1, filepath2, 'plain').trim()).toEqual(expected.trim())
-})
-
-test('Json format testing', () => {
-  const filepath1 = getFixturePath('file1.json')
-  const filepath2 = getFixturePath('file2.json')
-  const expected = readFile('expectedResultJson.txt')
-
-  expect(getDiff(filepath1, filepath2, 'json').trim()).toEqual(expected.trim())
+  test.each(formatTests)(
+    'Compare JSON files with %s formatter',
+    (format, expectedFile) => {
+      const result = getDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), format)
+      const expected = readFile(expectedFile)
+      expect(result.trim()).toEqual(expected)
+    },
+  )
 })
