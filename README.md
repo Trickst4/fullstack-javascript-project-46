@@ -24,12 +24,20 @@ npm link
 ### Возможности утилиты:
 
 * Поддержка разных входных форматов: yaml, json
+* Генерация отчета в виде plain text, stylish и json
 
 ### Пример использования:
 
 ```
+# формат plain
+bin/gendiff.js __fixtures__/file1.json __fixtures__/file2.json -f plain
+
+Property 'common.follow' was added with value: false
+Property 'group1.baz' was updated. From 'bas' to 'bars'
+Property 'group2' was removed
+
 # формат stylish
-gendiff filepath1.json filepath2.json
+bin/gendiff.js __fixtures__/file1.json __fixtures__/file2.json
 
 {
   + follow: false
@@ -50,13 +58,16 @@ gendiff filepath1.json filepath2.json
 ## Примеры работы:
 
 JSON
-https://asciinema.org/a/z3jw7WW5q2rlkbjIh8jKCcJz3
+[![asciicast](https://asciinema.org/a/z3jw7WW5q2rlkbjIh8jKCcJz3.svg)](https://asciinema.org/a/z3jw7WW5q2rlkbjIh8jKCcJz3)
 
 YLM
-https://asciinema.org/a/r9EowZO2ZBgto7rGFFOqMxlh6
+[![asciicast](https://asciinema.org/a/r9EowZO2ZBgto7rGFFOqMxlh6.svg)](https://asciinema.org/a/r9EowZO2ZBgto7rGFFOqMxlh6)
 
 Stylish format
-https://asciinema.org/a/yebTIpwwl89aiVyqpxIlfFf7s
+[![asciicast](https://asciinema.org/a/yebTIpwwl89aiVyqpxIlfFf7s.svg)](https://asciinema.org/a/yebTIpwwl89aiVyqpxIlfFf7s)
 
 Plain format
-https://asciinema.org/a/ENdbfugMoZdDTz1sU714cJJQL
+[![asciicast](https://asciinema.org/a/ENdbfugMoZdDTz1sU714cJJQL.svg)](https://asciinema.org/a/ENdbfugMoZdDTz1sU714cJJQL)
+
+JSON format
+[![asciicast](https://asciinema.org/a/UYZpA8dIqaHLImG4NJzBUezNb.svg)](https://asciinema.org/a/UYZpA8dIqaHLImG4NJzBUezNb)
