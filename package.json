@@ -11,14 +11,14 @@
     "url": "git+https://github.com/Trickst4/fullstack-javascript-project-46.git"
   },
   "license": "ISC",
-  "author": "",
+  "author": "Egor Ryzhov",
   "type": "module",
-  "main": "index.js",
+  "main": "src/index.js",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "test": "jest"
+    "test": "npx jest"
   },
   "dependencies": {
     "commander": "^13.1.0",
