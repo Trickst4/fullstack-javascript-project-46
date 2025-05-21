@@ -13,9 +13,20 @@ const stringify = (value, depth) => {
   return `{\n${lines.join('\n')}\n${indent(depth)}}`
 }
 
+const formatters = {
+  nested: (node, depth, formattedChildren) => `${indent(depth)}${node.key}: {\n${formattedChildren}\n${indent(depth)}}`,
+  unchanged: (node, depth) => `${indent(depth)}${node.key}: ${stringify(node.value, depth)}`,
+  changed: (node, depth) => [
+    `${indent(depth).slice(2)}- ${node.key}: ${stringify(node.oldValue, depth)}`,
+    `${indent(depth).slice(2)}+ ${node.key}: ${stringify(node.newValue, depth)}`,
+  ].join('\n'),
+  removed: (node, depth) => `${indent(depth).slice(2)}- ${node.key}: ${stringify(node.value, depth)}`,
+  added: (node, depth) => `${indent(depth).slice(2)}+ ${node.key}: ${stringify(node.value, depth)}`,
+}
+
 export const formatNode = (node, depth) => {
   const {
-    key, type, value, oldValue, newValue, children,
+    key, type, children,
   } = node
 
   if (type === undefined) {
@@ -24,23 +35,12 @@ export const formatNode = (node, depth) => {
 
   const formattedChildren = children ? children.map(child => formatNode(child, depth + 1)).join('\n') : ''
 
-  switch (type) {
-    case 'nested':
-      return `${indent(depth)}${key}: {\n${formattedChildren}\n${indent(depth)}}`
-    case 'unchanged':
-      return `${indent(depth)}${key}: ${stringify(value, depth)}`
-    case 'changed':
-      return [
-        `${indent(depth).slice(2)}- ${key}: ${stringify(oldValue, depth)}`,
-        `${indent(depth).slice(2)}+ ${key}: ${stringify(newValue, depth)}`,
-      ].join('\n')
-    case 'removed':
-      return `${indent(depth).slice(2)}- ${key}: ${stringify(value, depth)}`
-    case 'added':
-      return `${indent(depth).slice(2)}+ ${key}: ${stringify(value, depth)}`
-    default:
-      throw new Error(`Неизвестный тип узла: ${type}`)
+  const formatter = formatters[type]
+  if (!formatter) {
+    throw new Error(`Неизвестный тип узла: ${type}`)
   }
+
+  return formatter(node, depth, formattedChildren)
 }
 
 const stylishFormatDiff = (diff) => {
